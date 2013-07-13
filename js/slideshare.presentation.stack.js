@@ -1,8 +1,9 @@
 slidesharePresentationStack = {
+    container: document.getElementById('slideshare.slides'),
 
     init : function(){
-        var div = document.getElementById('slideshare.slides');
-        this.get('http://www.slideshare.net/rss/user/' + div.getAttribute('username'));
+        if(this.container)
+            this.get('http://www.slideshare.net/rss/user/' + this.container.getAttribute('data-username'));
     },
 
     get : function(surl) {
@@ -15,27 +16,39 @@ slidesharePresentationStack = {
         document.getElementsByTagName('body')[0].appendChild(script);
     },
 
+    calculateHeight: function (iframe_text, container_width) {
+        var existing_iframe_width = iframe_text.match(/\swidth="([0-9]+)"/)[1];
+        var existing_iframe_height = iframe_text.match(/\sheight="([0-9]+)"/)[1];
+        var iframe_ratio = existing_iframe_height / existing_iframe_width;
+        return (container_width * iframe_ratio);
+    },
+
     displayPresentationStack: function(o) {
-        var container = document.createElement('div');
+        var slide_container = document.createElement('div');
+        var container_width = this.container.getAttribute('data-width');
+
         if(o.error) {
-            container.innerHTML = "Internal Server Error! Please try after sometime."
+            slide_container.innerHTML = "Internal Server Error! Please try after sometime."
         } else if(!o.query.results) {
-            container.innerHTML = "No slides found for this user."
+            slide_container.innerHTML = "No slides found for this user."
         } else {
             var iframes = o.query.results.embed;
             var thumbnails = o.query.results.thumbnail;
             for (var index in iframes) {
                 var iframe_div = document.createElement('div');
                 var thumbnail_div = document.createElement('div');
-                iframe_div.innerHTML = iframes[index];
+                var iframe_text = iframes[index];
+                var container_height = this.calculateHeight(iframe_text, container_width);
+                iframe_div.innerHTML = iframe_text.replace(/\swidth="[0-9]+"/, ' width="' + container_width + '"').replace(/\sheight="[0-9]+"/, ' height="' + container_height + '"');
                 var thumbnail = document.createElement('img');
                 thumbnail.src = 'https:' + thumbnails[index].url;
                 thumbnail.width = '40';
                 thumbnail_div.appendChild(thumbnail);
-                container.appendChild(iframe_div);
-                container.appendChild(thumbnail_div);
+                slide_container.appendChild(iframe_div);
+                slide_container.appendChild(thumbnail_div);
             }
         }
-        document.getElementById('slideshare.slides').appendChild(container);
+        this.container.style.width = container_width + 'px';
+        this.container.appendChild(slide_container);
     }
 }
