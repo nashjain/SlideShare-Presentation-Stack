@@ -63,7 +63,7 @@ slidesharePresentationStack = {
     createSlideNavigationItem: function(iFrameText, thumbnailUrl) {
         var src = this.extract(iFrameText, /\ssrc="(.*?)"/);
         var title = "<div class='title'>" + this.extract(iFrameText, /\stitle="(.*?)"/) + "</div>";
-        var thumbnail = "<div class='thumbnail'><img src='"+thumbnailUrl+"'/></div>";
+        var thumbnail = "<div class='thumbnail'><img src='http://"+ thumbnailUrl+"'/></div>";
         return '<li><a href="#" onclick="slidesharePresentationStack.renderPresentation(\''+src+'\')">'+ thumbnail + title +'<div style="clear: both"></div></a></li>';
     },
 
@@ -91,6 +91,7 @@ slidesharePresentationStack = {
         var containerHeight = this.calculateHeight(iFrameText, slideWidth);
         this.container.style.height = containerHeight + "px";
         iFrameDiv.innerHTML = iFrameText.replace(/<div.*?div>/, '').replace(/\swidth="[0-9]+"/, ' width="' + slideWidth + '"').replace(/\sheight="[0-9]+"/, ' height="' + containerHeight + '"');
+        iFrameDiv.getElementsByTagName('iframe')[0].style.marginBottom = '0px';
         return iFrameDiv;
     },
 
