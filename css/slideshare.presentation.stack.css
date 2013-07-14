@@ -1,6 +1,5 @@
 #slideshare_slides{
     border:1px solid #ccc;
-    padding:10px;
     position:relative;
 }
 #slideshare_slides *{
@@ -12,21 +11,19 @@
 #slideshare_slides .slidesharepresentations{
     overflow:auto;
     height: 100%;
-    padding:0 5px;
 }
 #slideshare_slides .slidesharepresentations li{
-    padding:2px 0 4px 0;
+    padding:4px;
     display: inline-table;
     border-bottom: 2px solid gray;
-    width: 100%;
+    width: 96%;
 }
 #slideshare_slides .slidesharepresentations img{
     float: left;
-    margin-right: 7px;
+    margin-right: 5px;
 }
 #slideshare_slides a{
     display:block;
-    padding:2px 5px;
     color:#333;
     background:#fff;
     text-decoration:none;

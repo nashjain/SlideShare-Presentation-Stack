@@ -33,8 +33,8 @@ slidesharePresentationStack = {
 
     createSlideNavigationItem: function (iframe_text, thumbnail_url) {
         var src = this.extract(iframe_text, /\ssrc="(.*?)"/);
-        var title = '<div>' + this.extract(iframe_text, /\stitle="(.*?)"/) + '</div>';
-        var thumbnail = "<div style='float: left'><img src='https:"+thumbnail_url+"' width='40'/></div>";
+        var title = '<div style="margin-left: 38%;">' + this.extract(iframe_text, /\stitle="(.*?)"/) + '</div>';
+        var thumbnail = "<div style='float: left;width: 35%;'><img src='https:"+thumbnail_url+"' style='width: 100%'/></div>";
         return '<li><a href="#" onclick="slidesharePresentationStack.renderPresentation(\''+src+'\')">'+ thumbnail + title +'<div style="clear: both"></div></a></li>';
     },
 
