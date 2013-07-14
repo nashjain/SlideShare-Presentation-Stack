@@ -89,13 +89,17 @@ slidesharePresentationStack = {
                 this.container.style.height = container_height + "px";
                 iframe_div.innerHTML = first_iframe_text.replace(/<div.*?div>/, '').replace(/\swidth="[0-9]+"/, ' width="' + slide_width + '"').replace(/\sheight="[0-9]+"/, ' height="' + container_height + '"');
                 slide_container.appendChild(iframe_div);
-            }
 
-            var slide_navigation_text = "";
-            for (var index in iframes) {
-                slide_navigation_text += this.createSlideNavigationItem(iframes[index], thumbnails[index].url);
+                var num_presentations = iframes.length;
+                var user_specified_limit = this.container.getAttribute('data-num-presentations');
+                if(user_specified_limit && user_specified_limit < num_presentations)
+                    num_presentations = user_specified_limit;
+                var slide_navigation_text = "";
+                for (var index=0; index<num_presentations; index++) {
+                    slide_navigation_text += this.createSlideNavigationItem(iframes[index], thumbnails[index].url);
+                }
+                slide_navigation.innerHTML = "<ul class='slidesharepresentations'>" + slide_navigation_text + "</ul>";
             }
-            slide_navigation.innerHTML = "<ul class='slidesharepresentations'>" + slide_navigation_text + "</ul>";
         }
         this.container.style.width = parseInt(slide_width) + parseInt(slide_navigation_bar_width) + 'px';
         this.container.appendChild(slide_navigation);
