@@ -1,5 +1,5 @@
 slidesharePresentationStack = {
-    container: document.getElementById('slideshare.slides'),
+    container: document.getElementById('slideshare_slides'),
 
     init : function(){
         if(this.container)
@@ -33,9 +33,9 @@ slidesharePresentationStack = {
 
     createSlideNavigationItem: function (iframe_text, thumbnail_url) {
         var src = this.extract(iframe_text, /\ssrc="(.*?)"/);
-        var title = this.extract(iframe_text, /\stitle="(.*?)"/);
-        var thumbnail = " <img src='https:"+thumbnail_url+"' width='40'/>";
-        return '<li><a href="#" onclick="slidesharePresentationStack.renderPresentation(\''+src+'\')">'+ title + thumbnail +'</a></li>';
+        var title = '<div>' + this.extract(iframe_text, /\stitle="(.*?)"/) + '</div>';
+        var thumbnail = "<div style='float: left'><img src='https:"+thumbnail_url+"' width='40'/></div>";
+        return '<li><a href="#" onclick="slidesharePresentationStack.renderPresentation(\''+src+'\')">'+ thumbnail + title +'<div style="clear: both"></div></a></li>';
     },
 
     displayPresentationStack: function(o) {
@@ -48,6 +48,7 @@ slidesharePresentationStack = {
         var slide_navigation_bar_width = this.container.getAttribute('data-navigation-width');
         slide_navigation.style.width = slide_navigation_bar_width + "px";
         slide_navigation.style.float = 'left';
+        slide_navigation.style.height = '100%';
 
         if(o.error) {
             slide_container.innerHTML = "Internal Server Error! Please try after sometime."
@@ -62,7 +63,8 @@ slidesharePresentationStack = {
                 iframe_div.id = "slideshare_presentation";
                 var first_iframe_text = iframes[0];
                 var container_height = this.calculateHeight(first_iframe_text, slide_width);
-                iframe_div.innerHTML = first_iframe_text.replace(/\swidth="[0-9]+"/, ' width="' + slide_width + '"').replace(/\sheight="[0-9]+"/, ' height="' + container_height + '"');
+                this.container.style.height = container_height + "px";
+                iframe_div.innerHTML = first_iframe_text.replace(/<div.*?div>/, '').replace(/\swidth="[0-9]+"/, ' width="' + slide_width + '"').replace(/\sheight="[0-9]+"/, ' height="' + container_height + '"');
                 slide_container.appendChild(iframe_div);
             }
 
@@ -71,7 +73,7 @@ slidesharePresentationStack = {
             for (var index in iframes) {
                 slide_navigation_text += this.createSlideNavigationItem(iframes[index], thumbnails[index].url);
             }
-            slide_navigation.innerHTML = "<ul>" + slide_navigation_text + "</ul>";
+            slide_navigation.innerHTML = "<ul class='slidesharepresentations'>" + slide_navigation_text + "</ul>";
         }
         this.container.style.width = parseInt(slide_width) + parseInt(slide_navigation_bar_width) + 'px';
         this.container.appendChild(slide_navigation);
