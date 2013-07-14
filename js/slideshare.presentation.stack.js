@@ -61,16 +61,40 @@ slidesharePresentationStack = {
         return '<li><a href="#" onclick="slidesharePresentationStack.renderPresentation(\''+src+'\')">'+ thumbnail + title +'<div style="clear: both"></div></a></li>';
     },
 
-    displayPresentationStack: function(response) {
+    create_left_floating_div: function(width) {
         var slide_container = document.createElement('div');
-        var slide_width = this.container.getAttribute('data-slide-width');
-        slide_container.style.width = slide_width + "px";
+        slide_container.style.width = width + "px";
         slide_container.style.float = 'left';
+        return slide_container;
+    },
 
-        var slide_navigation = document.createElement('div');
+    create_presentation_navigation_bar: function(iframes, thumbnails) {
+        var num_presentations = iframes.length;
+        var user_specified_limit = this.container.getAttribute('data-num-presentations');
+        if (user_specified_limit && user_specified_limit < num_presentations)
+            num_presentations = user_specified_limit;
+        var slide_navigation_text = "";
+        for (var index = 0; index < num_presentations; index++) {
+            slide_navigation_text += this.createSlideNavigationItem(iframes[index], thumbnails[index].url);
+        }
+        return "<ul class='slidesharepresentations'>" + slide_navigation_text + "</ul>";
+    },
+
+    create_presentation_frame: function(iframe_text, slide_width) {
+        var iframe_div = document.createElement('div');
+        iframe_div.id = "slideshare_presentation";
+        var container_height = this.calculateHeight(iframe_text, slide_width);
+        this.container.style.height = container_height + "px";
+        iframe_div.innerHTML = iframe_text.replace(/<div.*?div>/, '').replace(/\swidth="[0-9]+"/, ' width="' + slide_width + '"').replace(/\sheight="[0-9]+"/, ' height="' + container_height + '"');
+        return iframe_div;
+    },
+
+    displayPresentationStack: function(response) {
+        var slide_width = this.container.getAttribute('data-slide-width');
+        var slide_container = this.create_left_floating_div(slide_width);
+
         var slide_navigation_bar_width = this.container.getAttribute('data-navigation-width');
-        slide_navigation.style.width = slide_navigation_bar_width + "px";
-        slide_navigation.style.float = 'left';
+        var slide_navigation = this.create_left_floating_div(slide_navigation_bar_width);
         slide_navigation.style.height = '100%';
 
         if(response.error) {
@@ -80,25 +104,9 @@ slidesharePresentationStack = {
         } else {
             var iframes = response.query.results.embed;
             var thumbnails = response.query.results.thumbnail;
-
             if(iframes.length>0) {
-                var iframe_div = document.createElement('div');
-                iframe_div.id = "slideshare_presentation";
-                var first_iframe_text = iframes[0];
-                var container_height = this.calculateHeight(first_iframe_text, slide_width);
-                this.container.style.height = container_height + "px";
-                iframe_div.innerHTML = first_iframe_text.replace(/<div.*?div>/, '').replace(/\swidth="[0-9]+"/, ' width="' + slide_width + '"').replace(/\sheight="[0-9]+"/, ' height="' + container_height + '"');
-                slide_container.appendChild(iframe_div);
-
-                var num_presentations = iframes.length;
-                var user_specified_limit = this.container.getAttribute('data-num-presentations');
-                if(user_specified_limit && user_specified_limit < num_presentations)
-                    num_presentations = user_specified_limit;
-                var slide_navigation_text = "";
-                for (var index=0; index<num_presentations; index++) {
-                    slide_navigation_text += this.createSlideNavigationItem(iframes[index], thumbnails[index].url);
-                }
-                slide_navigation.innerHTML = "<ul class='slidesharepresentations'>" + slide_navigation_text + "</ul>";
+                slide_container.appendChild(this.create_presentation_frame(iframes[0], slide_width));
+                slide_navigation.innerHTML = this.create_presentation_navigation_bar(iframes, thumbnails);
             }
         }
         this.container.style.width = parseInt(slide_width) + parseInt(slide_navigation_bar_width) + 'px';
