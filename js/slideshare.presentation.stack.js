@@ -39,14 +39,14 @@ slidesharePresentationStack = {
         var fontColor = this.fetchContainerAttributeValueOrDefaultTo('data-font-color', '#333');
         var fontBackground = this.fetchContainerAttributeValueOrDefaultTo('data-slide-title-background', '#fff');
         var fontBackgroundOnHover = this.fetchContainerAttributeValueOrDefaultTo('data-slide-title-background-on-hover', '#c4c4c4');
-        var selectedSlideBackGround = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-background-color-in-navigation', '#393');
+        var selectedSlideBackGround = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-background-color-in-navigation', '#00A82E');
         var selectedSlideTitleColor = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-text-color-in-navigation', '#fff');
         var css = "#slideshare_slides{border:" + border + " solid " + borderColor + "; position:relative; padding-bottom: 5px;} \
                    #slideshare_slides *{margin:0; padding:0; list-style:none; float:none;} \
                    #slideshare_slides .slidesharepresentations{ overflow:auto; height: 100%;} \
                    #slideshare_slides .slidesharepresentations li{padding:4px; display: inline-table; border-bottom: " + slideDividerThickness + " solid " + slideDividerColor + "; margin-bottom: 2px; width: 96%;} \
                    #slideshare_slides .slidesharepresentations li .thumbnail{float: left; width: " + navigationThumbnailWidth + ";} \
-                   #slideshare_slides .slidesharepresentations li .title{margin-left: " + navigationPresentationTitleLeftMargin + ";} \
+                   #slideshare_slides .slidesharepresentations li .title{margin-left: " + navigationPresentationTitleLeftMargin + "; padding-top:6px} \
                    #slideshare_slides .slidesharepresentations li img{float: left; margin-right: 5px; width: 100%;} \
                    #slideshare_slides .slidesharepresentations li a{display:block; color:"+fontColor+"; background:"+fontBackground+"; text-decoration:none; font-family:"+fontFamily+"; font-size:"+fontSize+"; font-weight: "+fontWeight+";} \
                    #slideshare_slides .slidesharepresentations li a:hover{background:"+fontBackgroundOnHover+";} \
