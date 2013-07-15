@@ -38,9 +38,10 @@ slidesharePresentationStack = {
         var fontWeight = this.fetchContainerAttributeValueOrDefaultTo('data-font-weight', '700');
         var fontColor = this.fetchContainerAttributeValueOrDefaultTo('data-font-color', '#333');
         var fontBackground = this.fetchContainerAttributeValueOrDefaultTo('data-slide-title-background', '#fff');
-        var fontBackgroundOnHover = this.fetchContainerAttributeValueOrDefaultTo('data-slide-title-background-on-hover', '#c4c4c4');
-        var selectedSlideBackGround = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-background-color-in-navigation', '#00A82E');
-        var selectedSlideTitleColor = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-text-color-in-navigation', '#fff');
+        var fontBackgroundOnHover = this.fetchContainerAttributeValueOrDefaultTo('data-slide-title-background-on-hover', '#F0F0F0');
+        var selectedSlideBackGround = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-background-color-in-navigation', '#fff');
+        var selectedSlideTitleColor = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-text-color-in-navigation', '#333');
+        var selectedFontWeight = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-text-font-weight-in-navigation', '700');
         var css = "#slideshare_slides{border:" + border + " solid " + borderColor + "; position:relative; padding-bottom: 5px;} \
                    #slideshare_slides *{margin:0; padding:0; list-style:none; float:none;} \
                    #slideshare_slides .slidesharepresentations{ overflow:auto; height: 100%;} \
@@ -50,7 +51,7 @@ slidesharePresentationStack = {
                    #slideshare_slides .slidesharepresentations li img{float: left; margin-right: 5px; width: 100%;} \
                    #slideshare_slides .slidesharepresentations li a{display:block; color:"+fontColor+"; background:"+fontBackground+"; text-decoration:none; font-family:"+fontFamily+"; font-size:"+fontSize+"; font-weight: "+fontWeight+";} \
                    #slideshare_slides .slidesharepresentations li a:hover{background:"+fontBackgroundOnHover+";} \
-                   #slideshare_slides .slidesharepresentations li a.nav_slide_link_current{background:"+selectedSlideBackGround+"; color:"+selectedSlideTitleColor+";} \
+                   #slideshare_slides .slidesharepresentations li a.nav_slide_link_current{background:"+selectedSlideBackGround+"; color:"+selectedSlideTitleColor+"; font-weight:"+selectedFontWeight+";} \
                    #slideshare_presentation{background:" + borderColor + ";} \
                    ::-webkit-scrollbar {width: " + verticalScrollBarWidth + ";} \
                    ::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 " + remainingVerticalScrollBarWidth + " rgba(0,0,0,0.3); -webkit-border-radius: " + remainingVerticalScrollBarWidth + "; border-radius: " + remainingVerticalScrollBarWidth + ";} \
