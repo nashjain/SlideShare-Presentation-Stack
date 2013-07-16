@@ -1,11 +1,11 @@
 slidesharePresentationStack = {
-    container: document.getElementById('slideshare_slides'),
+    slidesharePresentationContainer: document.getElementById('slideshare_slides'),
 
-    protocol: document.location.href.search('https:') != -1 ? 'https:' : 'http:',
+    slidesharePresentationProtocol: document.location.href.search('https:') != -1 ? 'https:' : 'http:',
 
     init: function () {
-        if (this.container)
-            this.getRssFeedViaYQL('http://www.slideshare.net/rss/user/' + this.container.getAttribute('data-username'));
+        if (this.slidesharePresentationContainer)
+            this.getRssFeedViaYQL('http://www.slideshare.net/rss/user/' + this.slidesharePresentationContainer.getAttribute('data-username'));
     },
 
     extract: function (text, regex) {
@@ -13,7 +13,7 @@ slidesharePresentationStack = {
     },
 
     fetchContainerAttributeValueOrDefaultTo: function (attributeName, defaultValue) {
-        var value = this.container.getAttribute(attributeName);
+        var value = this.slidesharePresentationContainer.getAttribute(attributeName);
         if (!value) value = defaultValue;
         return value;
     },
@@ -26,16 +26,16 @@ slidesharePresentationStack = {
     },
 
     cssTag: function () {
-        var border = this.fetchContainerAttributeValueOrDefaultTo('data-border', '3px');
+        var border = this.fetchContainerAttributeValueOrDefaultTo('data-border', '0px');
         var borderColor = this.fetchContainerAttributeValueOrDefaultTo('data-border-color', '#c4c4c4');
-        var slideDividerThickness = this.fetchContainerAttributeValueOrDefaultTo('data-navigation-slide-divider-thickness', '2px');
+        var slideDividerThickness = this.fetchContainerAttributeValueOrDefaultTo('data-navigation-slide-divider-thickness', '1px');
         var slideDividerColor = this.fetchContainerAttributeValueOrDefaultTo('data-navigation-slide-divider-color', '#FF2635');
         var navigationThumbnailWidth = this.fetchContainerAttributeValueOrDefaultTo('data-navigation-thumbnail-width-percentage', '35%');
         var navigationPresentationTitleLeftMargin = (parseInt(navigationThumbnailWidth.replace('%', '')) + 3) + "%";
         var verticalScrollBarWidth = this.fetchContainerAttributeValueOrDefaultTo('data-vertical-scroll-bar-width', '6px');
         var verticalScrollBarColor = this.fetchContainerAttributeValueOrDefaultTo('data-vertical-scroll-bar-color', '#FF2635');
         var remainingVerticalScrollBarWidth = (parseInt(verticalScrollBarWidth.replace('px', '')) - 2) + "px";
-        var fontFamily = this.fetchContainerAttributeValueOrDefaultTo('data-font-family', 'Helvetica, Arial, Tahoma, sans-serif');
+        var fontFamily = this.fetchContainerAttributeValueOrDefaultTo('data-font-family', 'inherit');
         var fontSize = this.fetchContainerAttributeValueOrDefaultTo('data-font-size', '13px');
         var fontWeight = this.fetchContainerAttributeValueOrDefaultTo('data-font-weight', '500');
         var fontColor = this.fetchContainerAttributeValueOrDefaultTo('data-font-color', '#333');
@@ -44,21 +44,22 @@ slidesharePresentationStack = {
         var selectedSlideBackGround = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-background-color-in-navigation', '#fff');
         var selectedSlideTitleColor = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-text-color-in-navigation', '#333');
         var selectedFontWeight = this.fetchContainerAttributeValueOrDefaultTo('data-selected-slide-text-font-weight-in-navigation', '700');
-        var css = "#slideshare_slides{border:" + border + " solid " + borderColor + "; position:relative; padding-bottom: 5px;} \
-                   #slideshare_slides *{margin:0; padding:0; list-style:none; float:none;font-size: 12px;color: black;} \
-                   #slideshare_slides .slidesharepresentations{ overflow-x:hidden; overflow-y:auto; height: 100%;} \
-                   #slideshare_slides .slidesharepresentations li{padding:4px; display: inline-table; border-bottom: " + slideDividerThickness + " solid " + slideDividerColor + "; margin-bottom: 2px; width: 96%;} \
-                   #slideshare_slides .slidesharepresentations li .thumbnail{float: left; width: " + navigationThumbnailWidth + ";} \
-                   #slideshare_slides .slidesharepresentations li .slidetitle{margin-left: " + navigationPresentationTitleLeftMargin + "; padding-top:0px;} \
+        var css = "#slideshare_slides{border:" + border + " solid " + borderColor + "; position:relative;} \
+                   #slideshare_slides *{margin:0; padding:0; list-style:none; float:left;font-size: "+fontSize+";color: "+fontColor+";} \
+                   #slideshare_slides .slidesharepresentations{overflow-x:hidden; overflow-y:auto; height: 100%;} \
+                   #slideshare_slides .slidesharepresentations li{padding:4px; display: inline-table; border-bottom: " + slideDividerThickness + " solid " + slideDividerColor + "; width: 96%;} \
+                   #slideshare_slides .slidesharepresentations li:last-child{border-bottom: 0;} \
+                   #slideshare_slides .slidesharepresentations li .thumbnail{width: " + navigationThumbnailWidth + ";} \
+                   #slideshare_slides .slidesharepresentations li .slidetitle{margin-left: " + navigationPresentationTitleLeftMargin + "; padding-top:0px; float:none;} \
                    #slideshare_slides .slidesharepresentations li img{float: left; margin-right: 5px; width: 100%;} \
-                   #slideshare_slides .slidesharepresentations li a{display:block; color:"+fontColor+"; background:"+fontBackground+"; text-decoration:none; font-family:"+fontFamily+"; font-size:"+fontSize+"; font-weight: "+fontWeight+";} \
+                   #slideshare_slides .slidesharepresentations li a{display:block; color:"+fontColor+"; background:"+fontBackground+"; text-decoration:none; font-family:"+fontFamily+"; font-size:"+fontSize+"; font-weight: "+fontWeight+"; width: 100%;} \
                    #slideshare_slides .slidesharepresentations li a:hover{background:"+fontBackgroundOnHover+";} \
                    #slideshare_slides .slidesharepresentations li a.nav_slide_link_current{background:"+selectedSlideBackGround+"; color:"+selectedSlideTitleColor+"; font-weight:"+selectedFontWeight+";} \
                    ul.slidesharepresentations::-webkit-scrollbar {width: " + verticalScrollBarWidth + ";} \
                    ul.slidesharepresentations::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 " + remainingVerticalScrollBarWidth + " rgba(0,0,0,0.3); -webkit-border-radius: " + remainingVerticalScrollBarWidth + "; border-radius: " + remainingVerticalScrollBarWidth + ";} \
                    ul.slidesharepresentations::-webkit-scrollbar-thumb {-webkit-border-radius: " + remainingVerticalScrollBarWidth + "; border-radius: " + remainingVerticalScrollBarWidth + "; background: " + verticalScrollBarColor + "; -webkit-box-shadow: inset 0 0 " + remainingVerticalScrollBarWidth + " rgba(0,0,0,0.5); } \
                    ul.slidesharepresentations::-webkit-scrollbar-thumb:window-inactive { background: rgba(255,0,0,0.4); } \
-                   body {scrollbar-face-color: " + verticalScrollBarColor + ";}";
+                   ul.slidesharepresentations {scrollbar-face-color: " + verticalScrollBarColor + ";scrollbar-track-color: " + verticalScrollBarColor + ";}";
         var style = document.createElement('style');
         style.setAttribute('type', 'text/css');
         style.innerHTML = css;
@@ -66,7 +67,7 @@ slidesharePresentationStack = {
     },    
 
     getRssFeedViaYQL: function (surl) {
-        var root = 'http://query.yahooapis.com/v1/public/yql?q=';
+        var root = this.slidesharePresentationProtocol+'//query.yahooapis.com/v1/public/yql?q=';
         var yql = 'select * from xml where url="' + surl + '" and (itemPath="//item/*[local-name()=\'embed\']" OR itemPath="//item//*[local-name()=\'thumbnail\'][contains(@height, \'90\')]")';
         var url = root + encodeURIComponent(yql) + '&format=json&diagnostics=false&callback=slidesharePresentationStack.displayPresentationStack';
         document.getElementsByTagName('head')[0].appendChild(this.cssTag());
@@ -89,13 +90,13 @@ slidesharePresentationStack = {
     createSlideNavigationItem: function (iFrameText, thumbnailUrl) {
         var src = this.extract(iFrameText, /\ssrc="(.*?)"/);
         var title = "<div class='slidetitle'>" + this.extract(iFrameText, /\stitle="(.*?)"/) + "</div>";
-        var thumbnail = "<div class='thumbnail'><img src='" + this.protocol + thumbnailUrl + "'/></div>";
+        var thumbnail = "<div class='thumbnail'><img src='" + this.slidesharePresentationProtocol + thumbnailUrl + "'/></div>";
         return '<li><a href="#" class="nav_slide_link" onclick="slidesharePresentationStack.renderPresentation(\'' + src + '\', this);return false;">' + thumbnail + title + '<div style="clear: both"></div></a></li>';
     },
 
     createLeftFloatingDiv: function (width) {
         var slideContainer = document.createElement('div');
-        slideContainer.style.width = (width -6) + "px";
+        slideContainer.style.width = width + "px";
         slideContainer.style.float = 'left';
         return slideContainer;
     },
@@ -115,7 +116,7 @@ slidesharePresentationStack = {
         var iFrameDiv = document.createElement('div');
         iFrameDiv.id = "slideshare_presentation";
         var containerHeight = this.calculateHeight(iFrameText, slideWidth);
-        this.container.style.height = (parseInt(containerHeight) + 6) + "px";
+        this.slidesharePresentationContainer.style.height = parseInt(containerHeight) + "px";
         iFrameDiv.innerHTML = iFrameText.replace(/\sstyle=".*margin-bottom:5px/, '').replace(/<div.*?div>/, '')
             .replace(/\swidth="[0-9]+"/, ' width="' + slideWidth + '"').replace(/\sheight="[0-9]+"/, ' height="' + containerHeight + '"');
         return iFrameDiv;
@@ -142,8 +143,8 @@ slidesharePresentationStack = {
                 slideNavigation.getElementsByClassName('nav_slide_link')[0].setAttribute("class", "nav_slide_link_current");
             }
         }
-        this.container.style.width = parseInt(slideWidth) + parseInt(slideNavigationBarWidth) + 'px';
-        this.container.appendChild(slideNavigation);
-        this.container.appendChild(slideContainer);
+        this.slidesharePresentationContainer.style.width = parseInt(slideWidth) + parseInt(slideNavigationBarWidth) + 'px';
+        this.slidesharePresentationContainer.appendChild(slideNavigation);
+        this.slidesharePresentationContainer.appendChild(slideContainer);
     }
 };
