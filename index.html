@@ -120,7 +120,133 @@
                                                  data-slide-title-background-on-hover="#F0F0F0" data-selected-slide-background-color-in-navigation="#fff"
                                                  data-selected-slide-text-color-in-navigation="#333" data-selected-slide-text-font-weight-in-navigation="700"></div>
 
-											<ul class="actions actions-centered">
+                                            <div style="margin-top: 20px">
+                                                <h3>Customize Your Widget</h3>
+
+                                                <blockquote>
+                                                    &lt;div id="slideshare_slides" data-username="slideshare-username" data-num-presentations="10" data-slide-width="576"
+                                                    data-navigation-width="384" data-border="0px" data-border-color="#c4c4c4" data-navigation-slide-divider-thickness="1px"
+                                                    data-navigation-slide-divider-color="#FF2635" data-navigation-thumbnail-width-percentage="35%"
+                                                    data-vertical-scroll-bar-width="6px" data-vertical-scroll-bar-color="#FF2635" data-font-family="inherit"
+                                                    data-font-size="14px" data-font-weight="500" data-font-color="#333" data-slide-title-background="#fff"
+                                                    data-slide-title-background-on-hover="#F0F0F0" data-selected-slide-background-color-in-navigation="#fff"
+                                                    data-selected-slide-text-color-in-navigation="#333" data-selected-slide-text-font-weight-in-navigation="700"&gt;&lt;/div&gt;<br>
+                                                </blockquote>
+
+                                                <div style="text-align: center">
+                                                    <img src="demo/images/PresentationStackMarkup.png" title="Presentation Stack Markup" alt="Presentation Stack Markup">
+                                                </div>
+
+                                                <table class="style1">
+                                                    <tr>
+                                                        <th><b>Data Property Name</b></th>
+                                                        <th><b>Required?</b></th>
+                                                        <th><b>Description</b></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-username</span></td>
+                                                        <td>Yes</td>
+                                                        <td>SlideShare User Name who's presentations you want to display</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-num-presentations</span></td>
+                                                        <td>No. Defaults to 20. <br>Max. presentations = 20</td>
+                                                        <td>Number of slides to be listed in the slide navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-slide-width</span> <span class="badge-important">1</span></td>
+                                                        <td>No. Defaults to 60% of the page width</td>
+                                                        <td>Width (in percentage) of the actual slide display window</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-navigation-width</span> <span class="badge-important">2</span></td>
+                                                        <td>No. Defaults to 40% of the page width</td>
+                                                        <td>Width (in percentage) of the slide navigator sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-border</span> <span class="badge-important">3</span></td>
+                                                        <td>No. Defaults to 0px</td>
+                                                        <td>Width (in pixels) of the border around the widget.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-border-color</span> <span class="badge-important">3</span></td>
+                                                        <td>No. Defaults to Grey (#c4c4c4)</td>
+                                                        <td>Color of the border around the widget.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-navigation-slide-divider-thickness</span> <span class="badge-important">4</span></td>
+                                                        <td>No. Defaults to 1px</td>
+                                                        <td>Thickness (in pixels) of the divider between slides in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-navigation-slide-divider-color</span> <span class="badge-important">4</span></td>
+                                                        <td>No. Defaults to Red (#FF2635)</td>
+                                                        <td>Color of the divider between slides in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-navigation-thumbnail-width-percentage</span> <span class="badge-important">5</span></td>
+                                                        <td>No. Defaults to 35% of the sidebar width</td>
+                                                        <td>Width of the thumbnail in percentage of the sidebar width</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-vertical-scroll-bar-width</span> <span class="badge-important">6</span></td>
+                                                        <td>No. Defaults to 6px.</td>
+                                                        <td>Width (in pixels) of the scroll bar inside the navigation sidebar. (Works only in Chrome and Safari)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-vertical-scroll-bar-color</span> <span class="badge-important">6</span></td>
+                                                        <td>No. Defaults to Red (#FF2635).</td>
+                                                        <td>Color of the scroll bar inside the navigation sidebar. (Works only in Chrome and Safari)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-font-family</span> <span class="badge-important">7</span></td>
+                                                        <td>No. Defaults to the inherited font family.</td>
+                                                        <td>Font used to display the slide titles in the navigation sidebar.<br>Ex: data-font-family="Helvetica, Arial, sans-serif"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-font-size</span> <span class="badge-important">7</span></td>
+                                                        <td>No. Defaults to 14px</td>
+                                                        <td>Size of the font used to display the slide titles in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-font-weight</span> <span class="badge-important">7</span></td>
+                                                        <td>No. Defaults to Normal (500)</td>
+                                                        <td>Weight of the font used to display the slide titles in the navigation sidebar. Allowed values: 300, 500 and 700</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-font-color</span> <span class="badge-important">7</span></td>
+                                                        <td>No. Defaults to Grey (#333)</td>
+                                                        <td>Color of the font used to display the slide titles in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-slide-title-background</span> <span class="badge-important">7</span></td>
+                                                        <td>No. Defaults to White (#fff)</td>
+                                                        <td>Background color of the area on which the slide titles are displayed in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-slide-title-background-on-hover</span> <span class="badge-important">7</span></td>
+                                                        <td>No. Defaults to Light Grey (#F0F0F0)</td>
+                                                        <td>Background color used to highlight the slide title when we hover over it in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-selected-slide-background-color-in-navigation</span> <span class="badge-important">8</span></td>
+                                                        <td>No. Defaults to White (#fff)</td>
+                                                        <td>Background color of the area on which the selected slide title is displayed in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-selected-slide-text-color-in-navigation</span> <span class="badge-important">8</span></td>
+                                                        <td>No. Defaults to Grey (#333)</td>
+                                                        <td>Color of the font used to display the selected slide title in the navigation sidebar.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="property-name">data-selected-slide-text-font-weight-in-navigation</span> <span class="badge-important">8</span></td>
+                                                        <td>No. Defaults to Bold (700)</td>
+                                                        <td>Weight of the font used to display the selected slide title in the navigation sidebar. Allowed values: 300, 500 and 700</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            <ul class="actions actions-centered">
 												<li><a href="https://github.com/nashjain/SlideShare-Presentation-Stack/archive/master.zip" class="button button-style1 button-big">Download Source Code</a></li>
 											</ul>
 										</section>
